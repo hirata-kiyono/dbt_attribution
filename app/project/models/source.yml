@@ -23,28 +23,3 @@ sources:
       - name: searchdata_url_impression
         description: サイトのURLごとのインプレッションレポート
 
-
-  - name: tomods_anycube
-    database: tomods-cdp-2205
-    schema: 3b_tms_anycube
-    tables:
-      - name: initial_load_raw_table_14
-        description: 取引データ
-      - name: initial_load_raw_table_25
-        description: Ponta実績ファイル明細レコード
-
-  - name: tomods_satisfa
-    database: tomods-cdp-2205
-    schema: s3b_tms_satisfa
-    tables:
-      - name: initial_load_raw_table_42
-        description: カード会員データ
-
-  - name: tomods_betrend
-    database: tomods-cdp-2205
-    schema: 3b_tms_betrend
-    tables:
-      - name: initial_load_raw_table_1
-        description: アプリ会員データ
-
-  
