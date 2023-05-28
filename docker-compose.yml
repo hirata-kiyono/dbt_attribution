@@ -1,0 +1,13 @@
+version: "3.2"
+services:
+  dbt:
+    container_name: dbt_ga4
+    build: .
+    volumes:
+      - ~/.config/gcloud:/root/.config/gcloud
+      - ./app:/usr/app/dbt
+      - ./.dbt:/root/.dbt
+    ports:
+      - 8080:8080
+    env_file:
+      - .env

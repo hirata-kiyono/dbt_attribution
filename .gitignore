@@ -1,0 +1,5 @@
+.DS_STORE
+.env
+.dbt/.user.yml
+app/project/.secret
+app/logs/*

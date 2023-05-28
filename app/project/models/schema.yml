@@ -1,0 +1,302 @@
+
+version: 2
+
+models:
+
+  - name: ga4_view
+    description: "ga4 view data during all days."
+    columns:
+      - name: event_date
+        description: "イベント発生日付"
+        tests:
+          - not_null
+      - name: event_timestamp
+        description: "イベント発生日時のunix timestamp"
+        tests:
+          - not_null
+      - name: event_name
+        description: "イベント名前"
+        tests:
+          - not_null
+      - name: user_pseudo_id
+        description: "GA4が発行するユーザーID"
+        tests:
+          - not_null
+      - name: event_params
+        description: "イベントに関連するパラメータ"
+        tests:
+
+  - name: ga4_staging
+    description: "STRUCTを展開したGA4データ"
+    columns:
+      - name: event_date
+        description: "イベント発生日付"
+        tests:
+          - not_null
+      - name: event_datetime
+        description: "イベント発生日時"
+        tests:
+          - not_null
+      - name: event_name
+        description: "イベント名前"
+        tests:
+          - not_null
+      - name: user_pseudo_id
+        description: "GA4が発行するユーザーID"
+        tests:
+          - not_null
+      - name: ga_session_id
+        description: "GA4が発行するセッションID"
+        tests:
+      - name: page_referrer
+        description: "リファラ"
+        tests:
+      - name: page_title
+        description: "ページタイトル"
+        tests:
+      - name: session_engaged
+        description: "エンゲージメントしたイベントかどうか"
+        tests:
+      - name: ga_session_number
+        description: "セッション番号"
+        tests:
+      - name: utm_medium
+        description: "UTM_MEDIUM"
+        tests:
+      - name: utm_source
+        description: "UTM_SOURCE"
+        tests:
+      - name: utm_campaign
+        description: "UTM_SOURCE"
+        tests:
+      - name: utm_term
+        description: "UTM_TERM"
+        tests:
+      - name: page_type
+        description: "ページのタイプ"
+        tests:
+      - name: page_location
+        description: "ページのURL"
+        tests:
+      - name: ip_address
+        description: "IPアドレス"
+        tests:
+      - name: optimize_id
+        description: "Google OptimyzeのID"
+        tests:
+      - name: percent_scrolled
+        description: "スクロール率"
+        tests:
+      - name: experiment_id
+        description: "Google Optimyzeの検証ID"
+        tests:
+      - name: hashed_email
+        description: フォーム送信時のメールアドレスのSHA256ハッシュ値
+  - name: dbt_metrics_default_calendar
+    description: DBTが作成する日付カレンダー
+    columns:
+      - name: date_day
+        type: DATE
+      - name: date_week
+        type: DATE
+      - name: date_month
+        type: DATE
+      - name: date_quater
+        type: DATE
+      - name: date_year
+        type: DATE
+  - name: attribution_04_base
+    description: アトリビューション計算のベースとなるデータ。
+    columns:
+      - name: event_date
+        type: DATE
+        description: イベント発生日
+      - name: event_datetime
+        type: DATETIME
+        description: イベント発生日時
+      - name: customer_id
+        type: STRING
+        description: CVデータ/非CVデータに共通して利用できる顧客識別子
+      - name: event_name
+        type: STRING
+        description: イベント名
+      - name: utm_source
+        type: STRING
+        description: UTM_ソース
+      - name: utm_medium
+        type: STRING
+        description: UTM_メディア
+      - name: utm_campaign
+        type: STRING
+        description: UTM_キャンペーン
+      - name: cv_flg
+        type: INT64
+        description: このレコードがコンバージョンを表すレコードかどうか。0/1で表現される。
+      - name: cv_volume
+        type: INT64
+        description: コンバージョン価値。
+
+  - columns:
+    - description: イベント発生日
+      name: event_date
+      type: DATE
+    - description: イベント発生日時
+      name: event_datetime
+      type: DATETIME
+    - description: CVデータ/非CVデータに共通して利用できる顧客識別子
+      name: customer_id
+      type: STRING
+    - description: イベント名
+      name: event_name
+      type: STRING
+    - name: utm_source
+      type: STRING
+      description: UTM_ソース
+    - name: utm_medium
+      type: STRING
+      description: UTM_メディア
+    - name: utm_campaign
+      type: STRING
+      description: UTM_キャンペーン
+    - description: コンバージョンフラグ。このレコードがコンバージョンを表すかどうか。
+      name: cv_flg
+      type: INTEGER
+    - description: コンバージョン価値。コンバージョン価値のデフォルト値は1。
+      name: cv_volume
+      type: INTEGER
+    - description: 新規セッションかどうか。直前のイベントがコンバージョンイベントか、前回の広告流入から7日より経過していたら1となる。
+      name: is_new_session
+      type: INTEGER
+    name: attribution_051_sessionalize_7d_click
+    description: セッションフラグが付与されたテーブル。セッションの定義は「初回流入からコンバージョンするまで」かつ「初回流入から7日間」。7日以上前の広告効果はないものとする場合にこのモデルを利用する。
+
+
+  - columns:
+    - description: イベント発生日
+      name: event_date
+      type: DATE
+    - description: イベント発生日時
+      name: event_datetime
+      type: DATETIME
+    - description: CVデータ/非CVデータに共通して利用できる顧客識別子
+      name: customer_id
+      type: STRING
+    - description: イベント名
+      name: event_name
+      type: STRING
+    - name: utm_source
+      type: STRING
+      description: UTM_ソース
+    - name: utm_medium
+      type: STRING
+      description: UTM_メディア
+    - name: utm_campaign
+      type: STRING
+      description: UTM_キャンペーン
+    - description: コンバージョンフラグ。このレコードがコンバージョンを表すかどうか。
+      name: cv_flg
+      type: INTEGER
+    - description: コンバージョン価値。コンバージョン価値のデフォルト値は1。
+      name: cv_volume
+      type: INTEGER
+    - description: 新規セッションかどうか。直前のイベントがコンバージョンイベントの場合1となる。
+      name: is_new_session
+      type: INTEGER
+    name: attribution_050_sessionalize_no_limit
+    description: セッションフラグが付与されたテーブル。セッションの定義は「初回流入からコンバージョンするまで」。
+
+  - columns:
+    - description: イベント発生日
+      name: event_date
+      type: DATE
+    - description: イベント発生日時
+      name: event_datetime
+      type: DATETIME
+    - description: CVデータ/非CVデータに共通して利用できる顧客識別子
+      name: customer_id
+      type: STRING
+    - description: イベント名
+      name: event_name
+      type: STRING
+    - name: utm_source
+      type: STRING
+      description: UTM_ソース
+    - name: utm_medium
+      type: STRING
+      description: UTM_メディア
+    - name: utm_campaign
+      type: STRING
+      description: UTM_キャンペーン
+    - description: コンバージョンフラグ。このレコードがコンバージョンを表すかどうか。
+      name: cv_flg
+      type: INTEGER
+    - description: 顧客ごとのセッション番号。
+      name: cust_session_id
+      type: INTEGER
+    - description: このセッションがCVを含むかどうかのフラグ。
+      name: include_cv
+      type: INTEGER
+    - description: セッション内におけるこのイベントの順番。昇順。
+      name: node_no
+      type: INTEGER
+    - description: セッション内におけるこのイベントの順番。降順。
+      name: node_no_desc
+      type: INTEGER
+    - description: 初回訪問時のUTM_ソース。
+      name: landing_source
+      type: STRING
+    - description: 初回訪問時のUTM_メディア。
+      name: landing_medium
+      type: STRING
+    - description: 初回訪問時のUTM_キャンペーン。
+      name: landing_campaign
+      type: STRING
+    - description: 最終訪問時のUTM_ソース。
+      name: last_source
+      type: STRING
+    - description: 最終訪問時のUTM_メディア。
+      name: last_medium
+      type: STRING
+    - description: 最終訪問時のUTM_キャンペーン。
+      name: last_campaign
+      type: STRING
+    - description: セッションID。ここでのセッションとは初回訪問〜CVするまでを指す。
+      name: session_id
+      type: STRING
+    - description: このセッションのパス長
+      name: path_length
+      type: INTEGER
+    - description: 初回訪問した時の日時。
+      name: landing_time
+      type: DATETIME
+    - description: 最終訪問時の日時。
+      name: last_time
+      type: DATETIME
+    - description: コンバージョンしたときの日時。
+      name: cv_time
+      type: DATETIME
+    - description: コンバージョンに関するカスタムのUTM_ソース。
+      name: cv_event_source
+      type: STRING
+    - description: コンバージョンに関するカスタムのUTM_メディア。
+      name: cv_event_medium
+      type: STRING
+    - description: コンバージョンに関するカスタムのUTM_キャンペーン。
+      name: cv_event_campaign
+      type: STRING
+    - description: このセッションで最終的に発生したコンバージョンの価値
+      name: cv_volume
+      type: INTEGER
+    - description: ランディング重視モデルにおけるこのレコードのスコア
+      name: landing_score
+      type: INTEGER
+    - description: ラストクリックモデルにおけるこのレコードのスコア
+      name: last_score
+      type: INTEGER
+    - description: 均等配分モデルにおけるこのレコードのスコア
+      name: equal_score
+      type: FLOAT
+    - description: 減衰モデルにおけるこのレコードのスコア
+      name: linear_score
+      type: FLOAT
+    name: attribution_06_result

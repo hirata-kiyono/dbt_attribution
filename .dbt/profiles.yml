@@ -1,0 +1,14 @@
+first_project:
+  outputs:
+    dev:
+      fixed_retries: 1
+      location: "{{env_var('GCP_LOCATION')}}"
+      method: service-account
+      keyfile: /usr/app/dbt/first_project/.secret/secret.json
+      project: "{{env_var('GCP_PROJRCT')}}"
+      dataset: "{{env_var('DBT_DATASET_PREFIX','attribution')}}"
+      priority: interactive
+      threads: 3
+      timeout_seconds: 300
+      type: bigquery
+  target: dev
