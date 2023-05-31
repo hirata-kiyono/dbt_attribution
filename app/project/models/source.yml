@@ -12,14 +12,3 @@ sources:
     schema: 02_attribution_staging
     tables:
       - name: ot_offline_cv
-
-
-  - name: search_console
-    database: coastal-throne-267503
-    schema: searchconsole
-    tables:
-      - name: searchdata_site_impression
-        description: サイトの検索クエリごとのインプレッションレポート
-      - name: searchdata_url_impression
-        description: サイトのURLごとのインプレッションレポート
-

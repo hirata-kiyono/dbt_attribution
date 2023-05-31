@@ -17,8 +17,9 @@ SELECT
   utm_medium,
   utm_campaign,
   SUM(landing_score * cv_volume) landing_score,
-  SUM(last_score * cv_volume) last_score,
-  SUM(linear_score * cv_volume) linear_score,
+  SUM(last_score * cv_volume)    last_score,
+  SUM(equal_score * cv_volume)   equal_score,
+  SUM(linear_score * cv_volume)  linear_score,
 FROM
   {{ref('attribution_06_result')}}
 WHERE 0=0

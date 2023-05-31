@@ -9,13 +9,13 @@ WITH cv_change_session as (
 , with_time_limit_session as (
   SELECT
     *,
-    IF(
-      COALESCE(DATETIME_DIFF(
-        event_datetime,
-        LAG(event_datetime)OVER(PARTITION BY customer_id ORDER BY event_datetime),
-        DAY
-      ),0) >7
-    ,1,0) as is_new_time_session
+    if(
+      SUM(cv_flg)OVER(
+        PARTITION BY customer_id 
+        ORDER BY UNIX_DATE(event_date) 
+        RANGE BETWEEN CURRENT ROW AND 7 FOLLOWING)
+      >1,
+      1,0)as is_new_time_session,
   FROM
     cv_change_session
 )

@@ -1,10 +1,10 @@
-first_project:
+project:
   outputs:
     dev:
       fixed_retries: 1
       location: "{{env_var('GCP_LOCATION')}}"
       method: service-account
-      keyfile: /usr/app/dbt/first_project/.secret/secret.json
+      keyfile: /usr/app/dbt/project/.secret/secret.json
       project: "{{env_var('GCP_PROJRCT')}}"
       dataset: "{{env_var('DBT_DATASET_PREFIX','attribution')}}"
       priority: interactive

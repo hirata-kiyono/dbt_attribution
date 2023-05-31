@@ -1,0 +1,121 @@
+version: 2
+
+models:
+  - name: scores_per_utm_param
+    description: UTMパラメーターごとの、各CVモデルごとのCV数（スコア）
+    columns:
+      - description: UTM_ソース
+        name: utm_source
+        type: STRING
+      - description: UTM_メディア
+        name: utm_medium
+        type: STRING
+      - description: UTM_キャンペーン
+        name: utm_campaign
+        type: STRING
+      - description: ランディング重視モデルのCVスコア
+        name: landing_score
+        type: INTEGER
+      - description: ラストクリック重視モデルのCVスコア
+        name: last_score
+        type: INTEGER
+      - description: 均等配分モデルのCVスコア
+        name: equeal_score
+        type: FLOAT
+      - description: 減衰モデルのCVスコア
+        name: linear_score
+        type: FLOAT
+
+
+  - name: golden_route
+    description: ランディング -> 経由 -> ラスト のパターンごとの各種指標。
+    columns:
+      - description: 初回訪問時のUTM_ソース
+        name: landing_source
+        type: STRING
+      - description: 初回訪問時のUTM_メディア
+        name: landing_medium
+        type: STRING
+      - description: 初回訪問時のUTM_キャンペーン
+        name: landing_campaign
+        type: STRING
+      - description: UTM_ソース
+        name: utm_source
+        type: STRING
+      - description: UTM_メディア
+        name: utm_medium
+        type: STRING
+      - description: UTM_キャンペーン
+        name: utm_campaign
+        type: STRING
+      - description: 最終クリックのUTM_ソース
+        name: last_source
+        type: STRING
+      - description: 最終クリックのUTM_メディア
+        name: last_medium
+        type: STRING
+      - description: 最終クリックのUTM_キャンペーン
+        name: last_campaign
+        type: STRING
+      - description: パスの数
+        name: paths
+        type: INTEGER
+      - description: CVしたパスの数。
+        name: cv_paths
+        type: INTEGER
+      - description: セッションの数。
+        name: sessions
+        type: INTEGER
+      - description: CVしたセッションの数
+        name: cv_sessions
+        type: INTEGER
+      - description: このパスが関与するセッションの初回訪問~最終訪問までの日数の平均。
+        name: path_days
+        type: FLOAT
+      - description: このパスが関与するかつCVしたセッションの初回訪問~最終訪問までの日数の平均。
+        name: cv_path_days
+        type: FLOAT
+
+  - name: scores_per_utm_param
+    description: UTMパラメータごとのコンバージョン数
+    columns:
+      - description: UTM_ソース
+        name: utm_source
+        type: STRING
+      - description: UTM_メディア
+        name: utm_medium
+        type: STRING
+      - description: UTM_キャンペーン
+        name: utm_campaign
+        type: STRING
+      - description: ランディング重視モデルのCVスコア
+        name: landing_score
+        type: INTEGER
+      - description: ラストクリック重視モデルのCVスコア
+        name: last_score
+        type: INTEGER
+      - description: 減衰モデルのCVスコア
+        name: linear_score
+        type: FLOAT
+
+  - name: node_paths
+    description: 訪問N回目ごと、UTMパラメーターごとのパス数。include_cv(CVを含むセッションかどうか)を分けて確認し、CVする場合とCVしない場合の違いを確認する。
+    columns:
+      - description: 訪問N回目
+        name: node_no
+        type: INTEGER
+      - description: CVを含むセッションかどうか
+        name: include_cv
+        type: INTEGER
+      - description: UTM_ソース
+        name: utm_source
+        type: STRING
+      - description: UTM_メディア
+        name: utm_medium
+        type: STRING
+      - description: UTM_キャンペーン
+        name: utm_campaign
+        type: STRING
+      - description: パス数
+        name: paths
+        type: INTEGER
