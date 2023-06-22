@@ -2,13 +2,13 @@ version: 2
 
 sources:
   - name: staging
-    database: magnet-development
-    schema: analytics_306514867
+    database: another_dataset
+    schema: another_ga4_schema
     tables:
       - name: events_*
 
   - name: devlab
-    database: coastal-throne-267503
-    schema: 02_attribution_staging
+    database: offline_cv_dataset
+    schema: offline_cv_schema
     tables:
       - name: ot_offline_cv
