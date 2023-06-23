@@ -32,3 +32,11 @@
       >1,
       1,0)as is_new_time_session,
 ```
+
+#### 既存のBigQueryのテーブルからスキーマを取得する方法
+1. pythonコードを実行する
+   ```bash
+    $ python create_schema_yml.py PROJECT DATASET TABLE
+   ```
+
+1. temp_schema_yyyyMMddHHmmss.ymlが作成されるので適宜追加、更新を行う
