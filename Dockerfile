@@ -1,6 +1,6 @@
 FROM python:3.9.12-slim-bullseye
 
-ARG dbt_bigquery_ref=dbt-bigquery@v1.3.2
+ARG dbt_bigquery_ref=dbt-bigquery@v1.7.1
 
 # System setup
 RUN apt-get update \
